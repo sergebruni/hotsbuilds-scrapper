@@ -1,9 +1,12 @@
 {
   "name": "hotsbuilds-scrapper",
   "version": "0.0.1",
-  "description": "Scrape le web.",
+  "description": "Scrape hotslogs.com for heroes builds JSON",
   "main": "server.js",
-  "author": "Scotch",
+  "author": "Sergio Bruni",
+  "scripts": {
+    "start": "node server.js"
+  },
   "dependencies": {
     "cron": "^1.1.0",
     "express": "latest",
