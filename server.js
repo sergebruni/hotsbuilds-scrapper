@@ -5,8 +5,16 @@ var _       = require('lodash');
 var fs      = require('fs');
 var app     = express();
 var CronJob = require('cron').CronJob;
+var path = require('path');
 
 
+// viewed at http://localhost:8080
+app.get('/', function(req, res) {
+    res.sendFile(path.join(__dirname + '/index.html'));
+});
+app.get('/hotsbuilds', function(req, res) {
+    res.sendFile(path.join(__dirname + '/hotsbuilds.json'));
+});
 app.listen('8085')
 
 console.log('Scraping server running on 8085');
