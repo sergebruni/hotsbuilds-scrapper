@@ -6,14 +6,20 @@ var fs      = require('fs');
 var app     = express();
 var CronJob = require('cron').CronJob;
 var path = require('path');
-
+ 
 var PORT = process.env.PORT || 3000;
 
 app.get('/', function(req, res) {
     res.sendFile(path.join(__dirname + '/index.html'));
 });
 app.get('/hotsbuilds', function(req, res) {
-    res.sendFile(path.join(__dirname + '/hotsbuilds.json'));
+    res.sendFile(path.join(__dirname + '/public/hotsbuilds.json'));
+});
+app.get('/favicon', function(req, res) {
+    res.sendFile(path.join(__dirname + '/public/img/favicon.png'));
+});
+app.get('/card', function(req, res) {
+    res.sendFile(path.join(__dirname + '/public/img/card.png'));
 });
 
 app.listen(PORT, function (){
@@ -69,7 +75,7 @@ var job = new CronJob({
 
           if (Object.size(jsonbuilds.builds) === characterJson.length){
           
-            fs.writeFile('hotsbuilds.json', JSON.stringify(jsonbuilds, null, 4), function(err){
+            fs.writeFile('public/hotsbuilds.json', JSON.stringify(jsonbuilds, null, 4), function(err){
               console.log('File successfully written!');
             })
 
