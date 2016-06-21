@@ -7,19 +7,20 @@ var app     = express();
 var CronJob = require('cron').CronJob;
 var path = require('path');
 
+var PORT = process.env.PORT || 3000;
 
-// viewed at http://localhost:8080
 app.get('/', function(req, res) {
     res.sendFile(path.join(__dirname + '/index.html'));
 });
 app.get('/hotsbuilds', function(req, res) {
     res.sendFile(path.join(__dirname + '/hotsbuilds.json'));
 });
-app.listen('8085')
 
-console.log('Scraping server running on 8085');
+app.listen(PORT, function (){
+  console.log('Scraping server running on ' + PORT);
+});
 
-var jsonbuilds = {builds: {}, last_updated: ''};
+var jsonbuilds = { last_updated: '', builds: {}};
 
 var characterJson = ["Abathur", "Anub'arak", "Artanis", "Arthas", "Azmodan", "Brightwing", "Chen", "Cho", "Chromie", "Dehaka", "Diablo", "E.T.C.", "Falstad", "Gall", "Gazlowe", "Greymane", "Illidan", "Jaina", "Johanna", "Kael'thas", "Kerrigan", "Kharazim", "Leoric", "Li Li", "Li-Ming", "Lt. Morales", "Lunara", "Malfurion", "Medivh", "Muradin", "Murky", "Nazeebo", "Nova", "Raynor", "Rehgar", "Rexxar", "Sgt. Hammer", "Sonya", "Stitches", "Sylvanas", "Tassadar", "The Butcher", "The Lost Vikings", "Thrall", "Tracer", "Tychus", "Tyrael", "Tyrande", "Uther", "Valla", "Xul", "Zagara", "Zeratul"];
 
