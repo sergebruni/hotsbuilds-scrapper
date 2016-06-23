@@ -7,7 +7,7 @@ var app     = express();
 var CronJob = require('cron').CronJob;
 var path = require('path');
  
-var PORT = process.env.PORT || 3000;
+var PORT = process.env.PORT || 8000;
 
 app.get('/', function(req, res) {
     res.sendFile(path.join(__dirname + '/index.html'));
@@ -33,7 +33,7 @@ var characterJson = ["Abathur", "Anub'arak", "Artanis", "Arthas", "Azmodan", "Br
 jsonbuilds.last_updated = moment().format('MMMM Do YYYY, h:mm a');
 
 var job = new CronJob({
-  cronTime: '0 40 17 * * 3',
+  cronTime: '0 30 14 * * 1-5',
   onTick: function() {
     /*
      * Runs every Wednesday
@@ -47,6 +47,7 @@ var job = new CronJob({
       var model = 
           {
             build1: { 
+              rate: { selector: '#ctl00_MainContent_RadGridPopularTalentBuilds_ctl00__0 td.sorting_1'  },
               lv01: { selector: '#ctl00_MainContent_RadGridPopularTalentBuilds_ctl00_ctl04_imgTalent01', get: 'title' },
               lv04: { selector: '#ctl00_MainContent_RadGridPopularTalentBuilds_ctl00_ctl04_imgTalent04', get: 'title' },
               lv07: { selector: '#ctl00_MainContent_RadGridPopularTalentBuilds_ctl00_ctl04_imgTalent07', get: 'title' },
@@ -56,6 +57,7 @@ var job = new CronJob({
               lv20: { selector: '#ctl00_MainContent_RadGridPopularTalentBuilds_ctl00_ctl04_imgTalent20', get: 'title' }
             },
             build2: { 
+              rate: { selector: '#ctl00_MainContent_RadGridPopularTalentBuilds_ctl00__1 td.sorting_1'  },
               lv01: { selector: '#ctl00_MainContent_RadGridPopularTalentBuilds_ctl00_ctl06_imgTalent01', get: 'title' },
               lv04: { selector: '#ctl00_MainContent_RadGridPopularTalentBuilds_ctl00_ctl06_imgTalent04', get: 'title' },
               lv07: { selector: '#ctl00_MainContent_RadGridPopularTalentBuilds_ctl00_ctl06_imgTalent07', get: 'title' },
@@ -63,6 +65,16 @@ var job = new CronJob({
               lv13: { selector: '#ctl00_MainContent_RadGridPopularTalentBuilds_ctl00_ctl06_imgTalent13', get: 'title' },
               lv16: { selector: '#ctl00_MainContent_RadGridPopularTalentBuilds_ctl00_ctl06_imgTalent16', get: 'title' },
               lv20: { selector: '#ctl00_MainContent_RadGridPopularTalentBuilds_ctl00_ctl06_imgTalent20', get: 'title' }
+            },
+            build3: { 
+              rate: { selector: '#ctl00_MainContent_RadGridPopularTalentBuilds_ctl00__2 td.sorting_1'  },
+              lv01: { selector: '#ctl00_MainContent_RadGridPopularTalentBuilds_ctl00_ctl08_imgTalent01', get: 'title' },
+              lv04: { selector: '#ctl00_MainContent_RadGridPopularTalentBuilds_ctl00_ctl08_imgTalent04', get: 'title' },
+              lv07: { selector: '#ctl00_MainContent_RadGridPopularTalentBuilds_ctl00_ctl08_imgTalent07', get: 'title' },
+              lv10: { selector: '#ctl00_MainContent_RadGridPopularTalentBuilds_ctl00_ctl08_imgTalent10', get: 'title' },
+              lv13: { selector: '#ctl00_MainContent_RadGridPopularTalentBuilds_ctl00_ctl08_imgTalent13', get: 'title' },
+              lv16: { selector: '#ctl00_MainContent_RadGridPopularTalentBuilds_ctl00_ctl08_imgTalent16', get: 'title' },
+              lv20: { selector: '#ctl00_MainContent_RadGridPopularTalentBuilds_ctl00_ctl08_imgTalent20', get: 'title' }
             }
           }
 
@@ -71,7 +83,7 @@ var job = new CronJob({
 
           jsonbuilds.builds[value] = data
 
-          console.log(Object.size(jsonbuilds.builds), characterJson.length);
+          console.log(Object.size(jsonbuilds.builds), characterJson.length, data.build1.rate);
 
           if (Object.size(jsonbuilds.builds) === characterJson.length){
           
